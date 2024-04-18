@@ -1,7 +1,7 @@
 import pytest
 
 from src.domain.descriptors.username import Username
-from src.domain.exceptions.descriptors import TooShortValueException
+from src.domain.exceptions.descriptors import TooShortValueException, TooLongValueException
 
 
 def test_username_success():
@@ -19,6 +19,6 @@ def test_invalid_username_failure():
     
 
 def test_invalid_username_failure_2():
-    with pytest.raises(TooShortValueException):
-        Username("")
+    with pytest.raises(TooLongValueException):
+        Username("a"*30)
 
