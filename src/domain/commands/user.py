@@ -7,3 +7,8 @@ from src.domain.commands.base import BaseCommand
 class CreateUserCommand(BaseCommand):
     username: str
     
+
+@dataclass(frozen=True)
+class DeleteUserCommand(BaseCommand):
+    user_id: str
+    

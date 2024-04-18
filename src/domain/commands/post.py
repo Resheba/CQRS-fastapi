@@ -9,3 +9,8 @@ class CreatePostCommand(BaseCommand):
     text: str
     user_id: str
     
+
+@dataclass(frozen=True)
+class DeletePostCommand(BaseCommand):
+    post_id: str
+    
