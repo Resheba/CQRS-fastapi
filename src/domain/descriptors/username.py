@@ -1,7 +1,7 @@
 from pydantic.dataclasses import dataclass
 
-from .base import Descriptor
-from ..exceptions.descriptors import TooShortValueException
+from src.domain.descriptors.base import Descriptor
+from src.domain.exceptions.descriptors import TooShortValueException
 
 
 @dataclass(eq=False)

@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 
-from domain.descriptors.username import Username
-from domain.entities.base import BaseEntity
+from src.domain.descriptors.username import Username
+from src.domain.entities.base import BaseEntity
 
 
 @dataclass

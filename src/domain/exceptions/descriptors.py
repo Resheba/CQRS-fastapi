@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 
-from domain.exceptions.base import DomainException
+from src.domain.exceptions.base import DomainException
 
 
 @dataclass(eq=False)
