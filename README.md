@@ -30,21 +30,18 @@
 ## Tests Tasks
 - [ ] Application
   - [ ] Core
-  - [ ] Exceptions
   - [ ] Routers
     - [ ] Users
     - [ ] Posts
     - [ ] Chat
-- [ ] Domain
-  - [ ] Commands
-  - [ ] Descriptors
-  - [ ] Entities
-  - [ ] Events
-  - [ ] Exceptions
+- [X] Domain
+  - [X] Commands
+  - [X] Descriptors
+  - [X] Entities
+  - [X] Events
 - [ ] Infrastructure
   - [ ] Commands
   - [ ] Events
-  - [ ] Exceptions
   - [ ] Queries
   - [ ] Repositories
   - [ ] Mediator
