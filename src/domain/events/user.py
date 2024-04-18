@@ -7,3 +7,9 @@ from src.domain.events.base import BaseEvent
 @dataclass(frozen=True)
 class UserCreated(BaseEvent):
     user: User
+
+
+@dataclass(frozen=True)
+class UserDeleted(BaseEvent):
+    username: str
+    

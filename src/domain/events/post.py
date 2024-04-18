@@ -7,4 +7,9 @@ from src.domain.events.base import BaseEvent
 @dataclass(frozen=True)
 class PostCreated(BaseEvent):
     post: Post
+
+
+@dataclass(frozen=True)
+class PostDeleted(BaseEvent):
+    title: str
     
