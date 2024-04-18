@@ -13,12 +13,12 @@
     - [ ] Users
     - [ ] Posts
     - [ ] Chat
-- [ ] Domain
-  - [ ] Commands
-  - [ ] Descriptors
-  - [ ] Entities
-  - [ ] Events
-  - [ ] Exceptions
+- [X] Domain
+  - [X] Commands
+  - [X] Descriptors
+  - [X] Entities
+  - [X] Events
+  - [X] Exceptions
 - [ ] Infrastructure
   - [ ] Commands
   - [ ] Events
