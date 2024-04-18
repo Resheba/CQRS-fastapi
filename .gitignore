@@ -1,3 +1,5 @@
 __pycache__
 .env
 /example.py
+.vscode
+.pytest_cache
