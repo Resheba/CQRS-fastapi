@@ -6,6 +6,15 @@ from src.domain.exceptions.descriptors import TooLongValueException
 from src.infrastructure.commands.user import CreateUserCommandHandler, CreateUserCommand, User, Username
 
 
+@pytest.fixture(scope='class')
+def create_handler(repo):
+    return CreateUserCommandHandler(repository=repo)
+
+@pytest.fixture(scope='class')
+def delete_handler(repo):
+    return DeleteUserCommandHandler(repository=repo)
+    
+
 class TestCreateUserCommandHandler:
     @pytest.mark.asyncio
     async def test_create_user_success(self, repo: BaseMemoryRepository, create_handler: CreateUserCommandHandler):
@@ -44,6 +53,6 @@ class TestDeleteUserCommandHandler:
         assert len(await repo.get()) == 0
 
     @pytest.mark.asyncio
-    async def test_delete_user_invalid_user_id_failure(self, repo: BaseMemoryRepository, delete_handler: DeleteUserCommandHandler):
+    async def test_delete_user_invalid_user_id_failure(self):
         with pytest.raises(TypeError):
             DeleteUserCommand()

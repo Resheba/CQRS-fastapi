@@ -11,3 +11,6 @@ class Post(BaseEntity):
     text: Text
     user_id: str
     
+    def dict(self) -> dict:
+        return {'id': self.id, 'title': self.title, 'text': self.text, 'user_id': self.user_id}
+    
