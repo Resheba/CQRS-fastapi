@@ -6,7 +6,7 @@ from src.infrastructure.repository.base.base import BaseRepository
 from src.infrastructure.commands.base import BaseCommandHandler
 
 
-@dataclass
+@dataclass(frozen=True)
 class CreateUserCommandHandler(BaseCommandHandler[CreateUserCommand, User]):
     repository: BaseRepository
 
@@ -14,13 +14,12 @@ class CreateUserCommandHandler(BaseCommandHandler[CreateUserCommand, User]):
         username: Username = Username(command.username)
         user: User = User(username=username)
         await self.repository.add(user.dict())
-        return User
+        return user
     
 
-@dataclass
+@dataclass(frozen=True)
 class DeleteUserCommandHandler(BaseCommandHandler[DeleteUserCommand, None]):
     repository: BaseRepository
 
     async def handle(self, command: DeleteUserCommand) -> None:
         await self.repository.delete(command.user_id)
-        
