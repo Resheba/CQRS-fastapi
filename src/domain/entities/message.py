@@ -8,4 +8,4 @@ from src.domain.descriptors import MessageText
 @dataclass
 class Message(BaseEntity):
     message: MessageText
-    user: UUID
+    user: str

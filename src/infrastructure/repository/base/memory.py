@@ -6,17 +6,17 @@ class BaseMemoryRepository(BaseRepository):
     storage: list[Any]
 
     @classmethod
-    def get(cls, **filters):
+    async def get(cls, **filters):
         return cls.storage
     
     @classmethod
-    def add(cls, data: Any):
+    async def add(cls, data: Any):
         cls.storage.append(data)
 
     @classmethod
-    def delete(cls):
-        ...
+    async def delete(cls, id: Any):
+        cls.storage = [i for i in cls.storage if i.id != id]
 
     @classmethod
-    def update(cls):
+    async def update(cls):
         ...

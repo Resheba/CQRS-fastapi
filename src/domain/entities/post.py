@@ -9,5 +9,5 @@ from src.domain.descriptors import Text, Title
 class Post(BaseEntity):
     title: Title
     text: Text
-    user_id: UUID
+    user_id: str
     
