@@ -20,10 +20,10 @@
   - [X] Events
   - [X] Exceptions
 - [ ] Infrastructure
-  - [ ] Commands
+  - [X] Commands
   - [ ] Events
-  - [ ] Exceptions
-  - [ ] Queries
+  - [] Exceptions
+  - [X] Queries
   - [ ] Repositories
   - [ ] Mediator
 
@@ -40,8 +40,8 @@
   - [X] Entities
   - [X] Events
 - [ ] Infrastructure
-  - [ ] Commands
+  - [X] Commands
   - [ ] Events
-  - [ ] Queries
+  - [X] Queries
   - [ ] Repositories
   - [ ] Mediator
