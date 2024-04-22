@@ -14,7 +14,7 @@ class CreatePostCommandHandler(BaseCommandHandler[CreatePostCommand, Post]):
         title: Title = Title(command.title)
         text: Text = Text(command.text)
         post: Post = Post(title=title, text=text, user_id=command.user_id)
-        await self.repository.add(post.dict())
+        await self.repository.add(post)
         return post
     
 

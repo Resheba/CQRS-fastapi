@@ -1,22 +1,26 @@
-from typing import Any
+from typing import Any, TypeVar, Generic
+from dataclasses import dataclass, field
+
+from src.domain.entities.base import BaseEntity
 from src.infrastructure.repository.base.base import BaseRepository
 
 
-class BaseMemoryRepository(BaseRepository):
-    storage: list[dict] = list()
+ET = TypeVar('ET', bound=BaseEntity)
 
-    @classmethod
-    async def get(cls, **filters):
-        return cls.storage
+
+@dataclass(eq=False)
+class BaseMemoryRepository(BaseRepository, Generic[ET]):
+    storage: list[ET] = field(default_factory=list, kw_only=True)
+
+    async def get(self, **filters) -> tuple[ET]:
+        return self.storage
     
-    @classmethod
-    async def add(cls, data: dict):
-        cls.storage.append(data)
+    async def add(self, data: Any) -> ET:
+        self.storage.append(data)
+        return data
 
-    @classmethod
-    async def delete(cls, id: Any):
-        cls.storage = [i for i in cls.storage if i.get('id') != id]
+    async def delete(self, id: Any) -> None:
+        self.storage = [i for i in self.storage if i.id != id]
 
-    @classmethod
-    async def update(cls):
+    async def update(self):
         ...

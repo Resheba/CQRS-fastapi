@@ -4,8 +4,8 @@ from src.infrastructure.queries.message import GetMessageQuery, GetMessageQueryH
 
 
 @pytest.fixture(scope='class')
-def query_handler(repo):
-    return GetMessageQueryHandler(repository=repo)
+def query_handler(message_repo):
+    return GetMessageQueryHandler(repository=message_repo)
 
 
 class TestGetMessageQueryHandler:

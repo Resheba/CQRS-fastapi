@@ -13,5 +13,5 @@ class CreateMessageCommandHandler(BaseCommandHandler[CreateMessageCommand, Messa
     async def handle(self, command: CreateMessageCommand) -> Message:
         message_text: MessageText = MessageText(command.message)
         message: Message = Message(message=message_text, user=command.user_id)
-        await self.repository.add(message.dict())
+        await self.repository.add(message)
         return message

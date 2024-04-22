@@ -4,8 +4,8 @@ from src.infrastructure.queries.post import GetPostQuery, GetPostQueryHandler
 
 
 @pytest.fixture(scope='class')
-def query_handler(repo):
-    return GetPostQueryHandler(repository=repo)
+def query_handler(post_repo):
+    return GetPostQueryHandler(repository=post_repo)
 
 
 class TestGetPostQueryHandler:

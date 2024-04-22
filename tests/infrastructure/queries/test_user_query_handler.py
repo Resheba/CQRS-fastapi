@@ -4,8 +4,8 @@ from src.infrastructure.queries.user import GetUserQuery, GetUserQueryHandler
 
 
 @pytest.fixture(scope='class')
-def query_handler(repo):
-    return GetUserQueryHandler(repository=repo)
+def query_handler(user_repo):
+    return GetUserQueryHandler(repository=user_repo)
 
 
 class TestGetUserQueryHandler:

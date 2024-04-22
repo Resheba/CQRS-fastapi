@@ -5,13 +5,13 @@ from src.domain.exceptions.descriptors import TooShortValueException
 
 
 @pytest.fixture(scope='class')
-def create_handler(repo):
-    return CreateMessageCommandHandler(repository=repo)
+def create_handler(message_repo):
+    return CreateMessageCommandHandler(repository=message_repo)
 
 
 class TestCreateMessageCommandHandler:
     @pytest.mark.asyncio
-    async def test_create_user_command_success(self, repo: BaseRepository, create_handler: CreateMessageCommandHandler):
+    async def test_create_user_command_success(self, message_repo: BaseRepository, create_handler: CreateMessageCommandHandler):
         command: CreateMessageCommand = CreateMessageCommand(
             message='Simple text test',
             user_id='1'
@@ -21,16 +21,16 @@ class TestCreateMessageCommandHandler:
         assert message.message == MessageText('Simple text test')
 
     @pytest.mark.asyncio
-    async def test_create_user_command_success2(self, repo: BaseRepository, create_handler: CreateMessageCommandHandler):
+    async def test_create_user_command_success2(self, message_repo: BaseRepository, create_handler: CreateMessageCommandHandler):
         command: CreateMessageCommand = CreateMessageCommand(
             message='Simple text test',
             user_id='123'
         )
         await create_handler.handle(command=command)
-        assert len(await repo.get()) == 2
+        assert len(await message_repo.get()) == 2
 
     @pytest.mark.asyncio
-    async def test_create_user_command_invalid_username_failure(self, repo: BaseRepository, create_handler: CreateMessageCommandHandler):
+    async def test_create_user_command_invalid_username_failure(self, message_repo: BaseRepository, create_handler: CreateMessageCommandHandler):
         command: CreateMessageCommand = CreateMessageCommand(
             message='',
             user_id='1234'
@@ -38,5 +38,5 @@ class TestCreateMessageCommandHandler:
         with pytest.raises(TooShortValueException):
             await create_handler.handle(command=command)
 
-        assert len(await repo.get()) == 2
+        assert len(await message_repo.get()) == 2
     

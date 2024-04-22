@@ -1,9 +1,20 @@
 import pytest
 
-from src.infrastructure.repository.base.memory import BaseMemoryRepository
+from src.infrastructure.repository.user.memory import UserMemoryRepository
+from src.infrastructure.repository.post.memory import PostMemoryRepository
+from src.infrastructure.repository.message.memory import MessageMemoryRepository
 
 
 @pytest.fixture(scope='module')
-def repo():
-    BaseMemoryRepository.storage = list()
-    return BaseMemoryRepository()
+def user_repo():
+    return UserMemoryRepository()
+
+
+@pytest.fixture(scope='module')
+def post_repo():
+    return PostMemoryRepository()
+
+
+@pytest.fixture(scope='module')
+def message_repo():
+    return MessageMemoryRepository()

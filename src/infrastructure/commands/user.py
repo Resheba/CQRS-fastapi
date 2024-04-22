@@ -13,7 +13,7 @@ class CreateUserCommandHandler(BaseCommandHandler[CreateUserCommand, User]):
     async def handle(self, command: CreateUserCommand) -> User:
         username: Username = Username(command.username)
         user: User = User(username=username)
-        await self.repository.add(user.dict())
+        await self.repository.add(user)
         return user
     
 
