@@ -1,6 +1,6 @@
 import pytest
 
-from src.infrastructure.commands.message import BaseRepository, CreateMessageCommand, CreateMessageCommandHandler, Message, MessageText
+from src.infrastructure.commands.message import CreateMessageCommand, CreateMessageCommandHandler, Message, MessageText, BaseMessageRepository
 from src.domain.exceptions.descriptors import TooShortValueException
 
 
@@ -11,7 +11,7 @@ def create_handler(message_repo):
 
 class TestCreateMessageCommandHandler:
     @pytest.mark.asyncio
-    async def test_create_user_command_success(self, message_repo: BaseRepository, create_handler: CreateMessageCommandHandler):
+    async def test_create_user_command_success(self, message_repo: BaseMessageRepository, create_handler: CreateMessageCommandHandler):
         command: CreateMessageCommand = CreateMessageCommand(
             message='Simple text test',
             user_id='1'
@@ -21,7 +21,7 @@ class TestCreateMessageCommandHandler:
         assert message.message == MessageText('Simple text test')
 
     @pytest.mark.asyncio
-    async def test_create_user_command_success2(self, message_repo: BaseRepository, create_handler: CreateMessageCommandHandler):
+    async def test_create_user_command_success2(self, message_repo: BaseMessageRepository, create_handler: CreateMessageCommandHandler):
         command: CreateMessageCommand = CreateMessageCommand(
             message='Simple text test',
             user_id='123'
@@ -30,7 +30,7 @@ class TestCreateMessageCommandHandler:
         assert len(await message_repo.get()) == 2
 
     @pytest.mark.asyncio
-    async def test_create_user_command_invalid_username_failure(self, message_repo: BaseRepository, create_handler: CreateMessageCommandHandler):
+    async def test_create_user_command_invalid_username_failure(self, message_repo: BaseMessageRepository, create_handler: CreateMessageCommandHandler):
         command: CreateMessageCommand = CreateMessageCommand(
             message='',
             user_id='1234'

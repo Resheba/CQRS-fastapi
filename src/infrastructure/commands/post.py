@@ -2,13 +2,13 @@ from dataclasses import dataclass
 
 from src.domain.entities.post import Post, Text, Title
 from src.domain.commands.post import CreatePostCommand, DeletePostCommand
-from src.infrastructure.repository.base.base import BaseRepository
+from src.infrastructure.repository.post.base import BasePostRepository
 from src.infrastructure.commands.base import BaseCommandHandler
 
 
 @dataclass(frozen=True)
 class CreatePostCommandHandler(BaseCommandHandler[CreatePostCommand, Post]):
-    repository: BaseRepository
+    repository: BasePostRepository
 
     async def handle(self, command: CreatePostCommand) -> Post:
         title: Title = Title(command.title)
@@ -20,7 +20,7 @@ class CreatePostCommandHandler(BaseCommandHandler[CreatePostCommand, Post]):
 
 @dataclass(frozen=True)
 class DeletePostCommandHandler(BaseCommandHandler[DeletePostCommand, None]):
-    repository: BaseRepository
+    repository: BasePostRepository
 
     async def handle(self, command: DeletePostCommand) -> None:
         await self.repository.delete(command.post_id)
