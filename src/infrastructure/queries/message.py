@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from typing import Tuple
 
-from src.infrastructure.repository.base.base import BaseRepository
+from src.infrastructure.repository.message.base import BaseMessageRepository
 from src.infrastructure.queries.base import BaseQueryHandler
 from src.domain.entities.message import Message
 from src.domain.queries.message import GetMessageQuery
@@ -9,7 +9,7 @@ from src.domain.queries.message import GetMessageQuery
 
 @dataclass(frozen=True, eq=False)
 class GetMessageQueryHandler(BaseQueryHandler[GetMessageQuery, Tuple[Message]]):
-    repository: BaseRepository
+    repository: BaseMessageRepository
 
     async def handle(self, query: GetMessageQuery) -> Tuple[Message]:
         result = await self.repository.get(

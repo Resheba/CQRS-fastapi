@@ -7,21 +7,19 @@ from src.infrastructure.commands.base import CT, RT as CR,  BaseCommandHandler
 from src.infrastructure.queries.base import QT, RT as QR, BaseQueryHandler
 
 
-@dataclass(eq=False)
+@dataclass(eq=False, init=False)
 class Mediator:
     def __new__(cls, *args, **kwargs):
-        if not hasattr(cls, 'instance'):
-            cls.instance = super(Mediator, cls).__new__(cls, *args, **kwargs)
-        return cls.instance
-
-    _commands_map: defaultdict[CT, list[BaseCommandHandler]] = field(
-        default_factory=lambda: defaultdict(list),
-        kw_only=True,
-    )
-    _query_map: defaultdict[QT, list[BaseQueryHandler]] = field(
-        default_factory=lambda: defaultdict(list),
-        kw_only=True,
-    )
+        if not hasattr(cls, '_instance'):
+            cls._instance = super(Mediator, cls).__new__(cls, *args, **kwargs)
+            cls._inicialized = False
+        return cls._instance
+    
+    def __init__(self) -> None:
+        if not self._inicialized:
+            self._commands_map: defaultdict[CT, list[BaseCommandHandler]] = defaultdict(list)
+            self._query_map: defaultdict[QT, list[BaseQueryHandler]] = defaultdict(list)
+            self._inicialized = True
 
     def register_command(self, command: CT, handler: Iterable[BaseCommandHandler]) -> None:
         self._commands_map[command].extend(handler)

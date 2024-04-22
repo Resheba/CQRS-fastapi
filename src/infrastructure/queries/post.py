@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 
-from src.infrastructure.repository.base.base import BaseRepository
+from src.infrastructure.repository.post.base import BasePostRepository
 from src.infrastructure.queries.base import BaseQueryHandler
 from src.domain.entities.post import Post
 from src.domain.queries.post import GetPostQuery
@@ -8,7 +8,7 @@ from src.domain.queries.post import GetPostQuery
 
 @dataclass(frozen=True, eq=False)
 class GetPostQueryHandler(BaseQueryHandler[GetPostQuery, tuple[Post]]):
-    repository: BaseRepository
+    repository: BasePostRepository
 
     async def handle(self, query: GetPostQuery) -> tuple[Post]:
         result = await self.repository.get(

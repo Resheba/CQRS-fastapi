@@ -59,3 +59,11 @@ class TestMediator:
 
     def test_singleton(self):
         assert id(Mediator()) == id(Mediator())
+
+
+def test_mediator_setup():
+    from src.infrastructure.setup.container import setup_mediator
+    mediator = setup_mediator()
+    assert id(mediator) == id(Mediator())
+    assert mediator._commands_map == Mediator()._commands_map
+    assert mediator._query_map == Mediator()._query_map
