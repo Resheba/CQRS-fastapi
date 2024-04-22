@@ -1,5 +1,6 @@
 import pytest
 
+from src.infrastructure.exceptions.command import InvalidCommandTypeException
 from src.infrastructure.commands.message import CreateMessageCommand, CreateMessageCommandHandler, Message, MessageText, BaseMessageRepository
 from src.domain.exceptions.descriptors import TooShortValueException
 
@@ -40,3 +41,10 @@ class TestCreateMessageCommandHandler:
 
         assert len(await message_repo.get()) == 2
     
+    @pytest.mark.asyncio
+    async def test_create_user_command_invalid_command_failure2(self, message_repo: BaseMessageRepository, create_handler: CreateMessageCommandHandler):
+        bad_command: str = 'Bad Bad Command'
+
+        with pytest.raises(InvalidCommandTypeException): 
+            await create_handler.handle(command=bad_command)
+            

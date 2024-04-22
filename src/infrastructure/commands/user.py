@@ -11,6 +11,7 @@ class CreateUserCommandHandler(BaseCommandHandler[CreateUserCommand, User]):
     repository: BaseUserRepository
 
     async def handle(self, command: CreateUserCommand) -> User:
+        await super().handle(command)
         username: Username = Username(command.username)
         user: User = User(username=username)
         await self.repository.add(user)
@@ -22,4 +23,5 @@ class DeleteUserCommandHandler(BaseCommandHandler[DeleteUserCommand, None]):
     repository: BaseUserRepository
 
     async def handle(self, command: DeleteUserCommand) -> None:
+        await super().handle(command)
         await self.repository.delete(command.user_id)

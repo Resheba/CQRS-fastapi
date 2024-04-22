@@ -1,5 +1,6 @@
 import pytest
 
+from src.infrastructure.exceptions.command import InvalidCommandTypeException
 from src.infrastructure.commands.user import DeleteUserCommandHandler
 from src.infrastructure.repository.user.memory import UserMemoryRepository
 from src.domain.exceptions.descriptors import TooLongValueException
@@ -36,6 +37,13 @@ class TestCreateUserCommandHandler:
             await create_handler.handle(command=command)
         
         assert len(await user_repo.get()) == 1
+
+    @pytest.mark.asyncio
+    async def test_create_user_invalid_command_failure(self, user_repo: UserMemoryRepository, create_handler: CreateUserCommandHandler):
+        bad_command: str = 'Bad Bad Command'
+
+        with pytest.raises(InvalidCommandTypeException):
+            await create_handler.handle(command=bad_command)
 
 
 from src.infrastructure.commands.user import DeleteUserCommand
