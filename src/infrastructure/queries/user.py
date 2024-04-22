@@ -12,4 +12,4 @@ class GetUserQueryHandler(BaseQueryHandler[GetUserQuery, tuple[User]]):
 
     async def handle(self, query: GetUserQuery) -> tuple[User]:
         result = await self.repository.get(id=query.user_id, username=query.username)
-        return tuple(User(**user) for user in result)
+        return result

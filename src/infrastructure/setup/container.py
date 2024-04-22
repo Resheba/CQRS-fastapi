@@ -1,4 +1,4 @@
-from punq import Container
+from punq import Container, Scope
 
 from src.infrastructure.repository import (
     BaseMessageRepository, 
@@ -49,9 +49,9 @@ def setup_mediator() -> Mediator:
 
 def setup_container() -> Container:
     container: Container = Container()
-    container.register(BaseMessageRepository, MessageMemoryRepository)
-    container.register(BasePostRepository, PostMemoryRepository)
-    container.register(BaseUserRepository, UserMemoryRepository)
+    container.register(BaseMessageRepository, MessageMemoryRepository, scope=Scope.singleton)
+    container.register(BasePostRepository, PostMemoryRepository, scope=Scope.singleton)
+    container.register(BaseUserRepository, UserMemoryRepository, scope=Scope.singleton)
     
     container.register(CreateMessageCommandHandler)
     container.register(CreatePostCommandHandler)

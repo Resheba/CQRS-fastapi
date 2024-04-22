@@ -17,19 +17,19 @@ class Mediator:
     
     def __init__(self) -> None:
         if not self._inicialized:
-            self._commands_map: defaultdict[CT, set[BaseCommandHandler]] = defaultdict(set)
-            self._query_map: defaultdict[QT, set[BaseQueryHandler]] = defaultdict(set)
+            self._commands_map: defaultdict[CT, list[BaseCommandHandler]] = defaultdict(list)
+            self._query_map: defaultdict[QT, list[BaseQueryHandler]] = defaultdict(list)
             self._inicialized = True
     
     def _reset(self) -> None:
-        self._commands_map: defaultdict[CT, set[BaseCommandHandler]] = defaultdict(set)
-        self._query_map: defaultdict[QT, set[BaseQueryHandler]] = defaultdict(set)
+        self._commands_map: defaultdict[CT, list[BaseCommandHandler]] = defaultdict(list)
+        self._query_map: defaultdict[QT, list[BaseQueryHandler]] = defaultdict(list)
 
     def register_command(self, command: CT, handlers: Iterable[BaseCommandHandler]) -> None:
-        self._commands_map[command].update(handlers)
+        self._commands_map[command].extend(handlers)
     
     def register_query(self, query: QT, handlers: Iterable[BaseQueryHandler]) -> None:
-        self._query_map[query].update(handlers)
+        self._query_map[query].extend(handlers)
     
     async def handle_command(self, command: CT) -> Iterable[CR]:
         handlers: list[BaseCommandHandler] = self._commands_map[command.__class__]
@@ -44,4 +44,3 @@ class Mediator:
         if not handlers:
             raise NoHandlerRegisteredException(f'No handler registered for {query.__class__}')
         return [await handler.handle(query) for handler in handlers]
-    
