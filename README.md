@@ -17,6 +17,7 @@
   - [X] Commands
   - [X] Descriptors
   - [X] Entities
+  - [X] Queries
   - [X] Events
   - [X] Exceptions
 - [ ] Infrastructure
