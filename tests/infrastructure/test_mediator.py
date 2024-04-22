@@ -56,3 +56,6 @@ class TestMediator:
     async def test_mediator_handle_invalid_query(self, mediator: Mediator):
         with pytest.raises(NoHandlerRegisteredException):
             await mediator.handle_query(GetUserQuery())
+
+    def test_singleton(self):
+        assert id(Mediator()) == id(Mediator())

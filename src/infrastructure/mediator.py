@@ -9,6 +9,11 @@ from src.infrastructure.queries.base import QT, RT as QR, BaseQueryHandler
 
 @dataclass(eq=False)
 class Mediator:
+    def __new__(cls, *args, **kwargs):
+        if not hasattr(cls, 'instance'):
+            cls.instance = super(Mediator, cls).__new__(cls, *args, **kwargs)
+        return cls.instance
+
     _commands_map: defaultdict[CT, list[BaseCommandHandler]] = field(
         default_factory=lambda: defaultdict(list),
         kw_only=True,
