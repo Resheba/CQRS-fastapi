@@ -22,7 +22,7 @@
 - [ ] Infrastructure
   - [X] Commands
   - [ ] Events
-  - [ ] Exceptions
+  - [X] Exceptions
   - [X] Queries
   - [X] Repositories
   - [ ] Mediator
