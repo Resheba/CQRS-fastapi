@@ -17,15 +17,19 @@ class Mediator:
     
     def __init__(self) -> None:
         if not self._inicialized:
-            self._commands_map: defaultdict[CT, list[BaseCommandHandler]] = defaultdict(list)
-            self._query_map: defaultdict[QT, list[BaseQueryHandler]] = defaultdict(list)
+            self._commands_map: defaultdict[CT, set[BaseCommandHandler]] = defaultdict(set)
+            self._query_map: defaultdict[QT, set[BaseQueryHandler]] = defaultdict(set)
             self._inicialized = True
-
-    def register_command(self, command: CT, handler: Iterable[BaseCommandHandler]) -> None:
-        self._commands_map[command].extend(handler)
     
-    def register_query(self, query: QT, handler: Iterable[BaseQueryHandler]) -> None:
-        self._query_map[query].extend(handler)
+    def _reset(self) -> None:
+        self._commands_map: defaultdict[CT, set[BaseCommandHandler]] = defaultdict(set)
+        self._query_map: defaultdict[QT, set[BaseQueryHandler]] = defaultdict(set)
+
+    def register_command(self, command: CT, handlers: Iterable[BaseCommandHandler]) -> None:
+        self._commands_map[command].update(handlers)
+    
+    def register_query(self, query: QT, handlers: Iterable[BaseQueryHandler]) -> None:
+        self._query_map[query].update(handlers)
     
     async def handle_command(self, command: CT) -> Iterable[CR]:
         handlers: list[BaseCommandHandler] = self._commands_map[command.__class__]

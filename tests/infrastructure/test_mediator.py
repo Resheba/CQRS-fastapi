@@ -7,8 +7,10 @@ from src.infrastructure.queries.user import GetUserQueryHandler, GetUserQuery
 from src.infrastructure.exceptions.mediator import NoHandlerRegisteredException
 
 
-@pytest.fixture
+@pytest.fixture(scope='function')
 def mediator():
+    if hasattr(Mediator, '_inicialized'):
+        Mediator()._reset()
     return Mediator()
 
 
@@ -26,12 +28,12 @@ class TestMediator:
     @pytest.mark.asyncio
     async def test_mediator_register_command(self, mediator: Mediator, create_handler: CreateUserCommandHandler):
         mediator.register_command(CreateUserCommand, [create_handler])
-        assert mediator._commands_map[CreateUserCommand] == [create_handler]
+        assert mediator._commands_map[CreateUserCommand] == {create_handler}
 
     @pytest.mark.asyncio
     async def test_mediator_register_query(self, mediator: Mediator, query_handler: GetUserQueryHandler):
         mediator.register_query(GetUserQuery, [query_handler])
-        assert mediator._query_map[GetUserQuery] == [query_handler]
+        assert mediator._query_map[GetUserQuery] == {query_handler}
 
     @pytest.mark.asyncio
     async def test_mediator_handle_command(self, mediator: Mediator, create_handler: CreateUserCommandHandler):
