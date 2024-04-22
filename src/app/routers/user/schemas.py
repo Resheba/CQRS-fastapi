@@ -1,6 +1,6 @@
 from pydantic import BaseModel, model_validator
 
-from src.domain.entities.user import User, Username
+from src.domain.entities.user import User
 
 
 class UserResponseSchema(BaseModel):

@@ -18,7 +18,7 @@ router: APIRouter = APIRouter()
             status_code=status.HTTP_200_OK,
             response_model=BaseResponse[list[UserResponseSchema]]
             )
-# @BaseHTTPException.handle
+@BaseHTTPException.handle
 async def get_users(
     mediator: Annotated[Mediator, Depends(MediatorDepend)],
 ):
@@ -37,3 +37,14 @@ async def create_user(
 ):
     user, *_ = await mediator.handle_command(command)
     return BaseResponse(data=user)
+
+
+@router.delete("/",
+               status_code=status.HTTP_204_NO_CONTENT,
+               )
+@BaseHTTPException.handle
+async def delete_user(
+    mediator: Annotated[Mediator, Depends(MediatorDepend)],
+    command: DeleteUserCommand
+):
+    await mediator.handle_command(command)
