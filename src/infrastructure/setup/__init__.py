@@ -1,0 +1,1 @@
+from .container import setup_mediator
