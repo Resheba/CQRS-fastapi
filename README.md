@@ -24,7 +24,7 @@
   - [ ] Events
   - [ ] Exceptions
   - [X] Queries
-  - [ ] Repositories
+  - [X] Repositories
   - [ ] Mediator
 
 ## Tests Tasks
@@ -43,5 +43,5 @@
   - [X] Commands
   - [ ] Events
   - [X] Queries
-  - [ ] Repositories
+  - [X] Repositories
   - [ ] Mediator
