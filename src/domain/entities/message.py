@@ -11,3 +11,4 @@ class Message(BaseEntity):
 
     def dict(self) -> dict:
         return {'id': self.id, 'message': self.message.value, 'user': self.user}
+    
