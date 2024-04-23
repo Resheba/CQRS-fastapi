@@ -17,4 +17,4 @@ class GetPostQueryHandler(BaseQueryHandler[GetPostQuery, tuple[Post]]):
             text=query.text,
             user_id=query.user_id,
         )
-        return tuple(Post(**post) for post in result)
+        return tuple(result)

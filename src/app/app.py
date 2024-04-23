@@ -14,5 +14,5 @@ def app() -> FastAPI:
         }
     )
     setup_mediator()
-    app.include_router(UserRouter)
+    app.include_router(UserRouter, prefix='/user')
     return app

@@ -17,4 +17,4 @@ class GetMessageQueryHandler(BaseQueryHandler[GetMessageQuery, Tuple[Message]]):
             message=query.message,
             user=query.user_id,
         )
-        return tuple(Message(**message) for message in result)
+        return tuple(result)

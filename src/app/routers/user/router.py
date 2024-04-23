@@ -14,7 +14,7 @@ from .schemas import UserResponseSchema
 router: APIRouter = APIRouter()
 
 
-@router.get("/", 
+@router.get("", 
             status_code=status.HTTP_200_OK,
             response_model=BaseResponse[list[UserResponseSchema]]
             )
@@ -26,7 +26,7 @@ async def get_users(
     return BaseResponse(data=users)
 
 
-@router.post("/", 
+@router.post("", 
              status_code=status.HTTP_201_CREATED,
              response_model=BaseResponse[UserResponseSchema]
              )
@@ -39,7 +39,7 @@ async def create_user(
     return BaseResponse(data=user)
 
 
-@router.delete("/",
+@router.delete("",
                status_code=status.HTTP_204_NO_CONTENT,
                )
 @BaseHTTPException.handle
