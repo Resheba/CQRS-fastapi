@@ -1,5 +1,5 @@
 # Target
-  Simple forum and chat API built on CQRS-like pattern.
+  Simple forum and chat (CRUD) API built on CQRS-like pattern. Template for patterns.
 
 ## Feature Tasks
 - [ ] docker
