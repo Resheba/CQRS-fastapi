@@ -7,10 +7,10 @@
   - [ ] Kafka
   - [ ] Compose
 - [ ] Application
-  - [ ] Core
-  - [ ] Exceptions
+  - [X] Core
+  - [X] Exceptions
   - [ ] Routers
-    - [ ] Users
+    - [X] Users
     - [ ] Posts
     - [ ] Chat
 - [X] Domain
@@ -32,7 +32,7 @@
 - [ ] Application
   - [ ] Core
   - [ ] Routers
-    - [ ] Users
+    - [X] Users
     - [ ] Posts
     - [ ] Chat
 - [X] Domain
